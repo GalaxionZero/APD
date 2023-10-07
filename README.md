@@ -1,1 +1,1 @@
-Semester 1 Algoritma Pemrograman Dasar beserta Praktikum nya
+First semester containing my progress in learning Python
