@@ -1,3 +1,4 @@
+import os
 retry = 'y'
 
 def getUserInput():
