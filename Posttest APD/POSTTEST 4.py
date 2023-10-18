@@ -12,7 +12,6 @@ def eexit():
     exit()
 
 
-
 def opsi():
     global ulang
     pilihan = ''
@@ -44,6 +43,8 @@ def register():
                     Nama User   : {nama}
                     Password    : {nim}
               =======================================
+                
+                   Redirecting to Login page...
                 ''')
     except:
         print('Hello')
@@ -61,6 +62,7 @@ def login():
             if logintoken not in listuser:
                 raise Exception('\nAnda belum register atau nama user dan password salah')
             return ending()
+        
         except Exception as f:
             ulang += 1
             print(f)
@@ -85,7 +87,9 @@ def ending():
     while True:
         try:
             x = getbmi()
-            print(f'\nAnda dinyatakan {checkvalue(x)}')
+            print(f'''\nAnda dinyatakan {checkvalue(x)}
+                        BMI anda {x}
+                  ''')
             retry = int(input('''\nIngin mengulang program?
                               1. Yes
                               2. No
@@ -105,29 +109,28 @@ def getbmi():
     while True:
         berat = float(input('Masukkan berat badan anda (mg): '))
         tinggi = float(input('Masukkan tinggi badan anda (km): '))
-        beratkg = berat * 10e-6
-        tinggim = tinggi * 10e2
+        beratkg = abs(berat) * 10e-6
+        tinggim = abs(tinggi) * 10e2
 
         bmi = beratkg / (tinggim ** 2)
         return bmi
 
 
-while True:
-    while ulang < 3:
-        print('''
-    ==========================
-    1. Register
-    2. Login and Enter Program
-    3. Exit Program
-    ==========================
+while ulang < 3:
+    print('''
+==========================
+1. Register
+2. Login and Enter Program
+3. Exit Program
+==========================
 ''')
-        pilihan = opsi()
+    pilihan = opsi()
 
-        if pilihan == '1':
-            register()
-        elif pilihan == '2':
-            login()
-        elif pilihan == '3':
-            eexit()
-    else:
+    if pilihan == '1':
+        register()
+    elif pilihan == '2':
+        login()
+    elif pilihan == '3':
         eexit()
+else:
+    eexit()
