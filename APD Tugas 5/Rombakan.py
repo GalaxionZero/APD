@@ -68,11 +68,11 @@ def search(course, name):
                 foundScorers.append((scorer, score))
 
     if foundScorers:
-        print(f"Scorer is found in {courseName} with the name '{name}':")
+        print(f"Scorer is found in {courseName} with the keyword '{name}':")
         for scorer, score in foundScorers:
             print(f"{scorer} : {score}")
     else:
-        print(f"No scorers found with the name '{name}'.")
+        print(f"No scorers found with the keyword '{name}'.")
 
 
 def filtered(course, threshold):
@@ -112,25 +112,26 @@ def main():
         match selection_menu:
             case '1':
                 while True:
-                        print('1. The 9 Hole Course')
-                        print('2. The 18 Hole Course')
-                        print('Choose which course you played in:')
-                        course = str(input(''))
-                        os.system('cls')
-                        if course == '1' or course == '2':
-                            try:
-                                while True:
-                                    print('Enter a name to associate the score:')
-                                    name = str(input(''))
-                                    print('Enter the score you obtained:')
-                                    score = int(input(''))
-                                    create(course, name, score)
-                                    print('Score has been added/updated')
-                                    break
-                            except ValueError:
-                                print('Enter a valid number')
-                        else:
-                            print("Selection must be what's shown!")
+                    print('1. The 9 Hole Course')
+                    print('2. The 18 Hole Course')
+                    print('Choose which course you played in:')
+                    course = str(input(''))
+                    os.system('cls')
+                    if course == '1' or course == '2':
+                        try:
+                            while True:
+                                print('Enter a name to associate the score:')
+                                name = str(input(''))
+                                print('Enter the score you obtained:')
+                                score = int(input(''))
+                                create(course, name, score)
+                                print('Score has been added/updated')
+                                break
+                        except ValueError:
+                            print('Enter a valid number')
+                    else:
+                        print("Selection must be what's shown!")
+                    break
 
 
             case '2':
@@ -138,7 +139,7 @@ def main():
                     print('')
                     print('1. The 9 Hole Course')
                     print('2. The 18 Hole Course')
-                    print("Choose which course's scores you would like to look at (C to return to main menu):")
+                    print("Choose which course's scores you would like to look at:")
                     course = str(input(''))
                     os.system('cls')
                     if course == '1' or course == '2':
@@ -166,19 +167,17 @@ def main():
                                             break
                                         except ValueError:
                                             print('Enter a valid number')
-
-                    elif course.upper() == 'C':
                         break
                     else:
                         print("Selection must be what's shown!")
-
+                    break
 
             case '3':
                 while True:
                     print('')
                     print('1. The 9 Hole Course')
                     print('2. The 18 Hole Course')
-                    print("Choose which course's score had an improvement in (C to return to main menu):")
+                    print("Choose which course's score had an improvement in:")
                     course = str(input(''))
                     os.system('cls')
                     if course == '1' or course == '2':
@@ -204,11 +203,10 @@ def main():
                                         print('Please input the right name')
                                 except(ValueError):
                                     print('Enter a valid number')
-
-                    elif course.upper() == 'C':
-                        break
+                            break
                     else:
                         print("Selection must be what's shown!")
+                    break
 
                 
             case '4':
@@ -216,7 +214,7 @@ def main():
                     print('')
                     print('1. The 9 Hole Course')
                     print('2. The 18 Hole Course')
-                    print("Choose which course's score you would like to delete (C to return to main menu):")
+                    print("Choose which course's score you would like to delete:")
                     course = str(input(''))
                     if course == '1' or course == '2':
                         while True:
@@ -233,10 +231,9 @@ def main():
                                 break
                             else:
                                 print('Please input the right name')
-                    elif course.upper() == 'C':
-                        break
                     else:
                         print("Selection must be what's shown!")
+                    break
 
                 
             case _:
