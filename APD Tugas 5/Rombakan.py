@@ -13,10 +13,7 @@ eighteenHoleCourse = {'Amuro' : 78,
 
 def create(course, name, score):
     if course == '1':
-        if name in nineHoleCourse:
-            nineHoleCourse.update({name : score})
-        else:
-            nineHoleCourse.update({name : score})
+        nineHoleCourse.update({name : score})
     elif course == '2':
         eighteenHoleCourse.update({name : score})
 
@@ -41,11 +38,8 @@ def update(course, scorer, score):
 def delete(course, scorer):
     if course == '1':
         del nineHoleCourse[scorer]
-        print(f"{scorer} deleted from nineHoleCourse.")
-        
     elif course == '2':
         del eighteenHoleCourse[scorer]
-        print(f"{scorer} deleted from eighteenHoleCourse.")
 
 
 def bubble_sort(course):
@@ -118,23 +112,25 @@ def main():
         match selection_menu:
             case '1':
                 while True:
-                    try:
                         print('1. The 9 Hole Course')
                         print('2. The 18 Hole Course')
                         print('Choose which course you played in:')
                         course = str(input(''))
                         os.system('cls')
                         if course == '1' or course == '2':
-                            print('Enter a name to associate the score:')
-                            name = str(input(''))
-                            print('Enter the score you obtained:')
-                            score = int(input(''))
-                            create(course, name, score)
-                            break
+                            try:
+                                while True:
+                                    print('Enter a name to associate the score:')
+                                    name = str(input(''))
+                                    print('Enter the score you obtained:')
+                                    score = int(input(''))
+                                    create(course, name, score)
+                                    print('Score has been added/updated')
+                                    break
+                            except ValueError:
+                                print('Enter a valid number')
                         else:
                             print("Selection must be what's shown!")
-                    except ValueError:
-                        print('Enter a valid number')
 
 
             case '2':
@@ -162,10 +158,15 @@ def main():
                                     search(course, name)
                                     break
                                 case '3':
-                                    print('Enter the threshold to filter out:')
-                                    threshold = int(input(''))
-                                    filtered(course, threshold)
-                                    break
+                                    while True:
+                                        try:
+                                            print('Enter the threshold to filter out:')
+                                            threshold = int(input(''))
+                                            filtered(course, threshold)
+                                            break
+                                        except ValueError:
+                                            print('Enter a valid number')
+
                     elif course.upper() == 'C':
                         break
                     else:
@@ -185,18 +186,25 @@ def main():
                             read(course)
                             print('Type the name of the scorer:')
                             scorer = str(input(''))
-                            if course == '1' and scorer in nineHoleCourse:
-                                print('\nEnter the new score')
-                                score = int(input(''))
-                                update(course, scorer, score)
-                                break
-                            elif course == '2' and scorer in eighteenHoleCourse:
-                                print('\nEnter the new score')
-                                score = int(input(''))
-                                update(course, scorer, score)
-                                break
-                            else:
-                                print('Please input the right name')
+                            while True:
+                                try:
+                                    if course == '1' and scorer in nineHoleCourse:
+                                        print('\nEnter the new score')
+                                        score = int(input(''))
+                                        update(course, scorer, score)
+                                        print('Score has been updated')
+                                        break
+                                    elif course == '2' and scorer in eighteenHoleCourse:
+                                        print('\nEnter the new score')
+                                        score = int(input(''))
+                                        update(course, scorer, score)
+                                        print('Score has been updated')
+                                        break
+                                    else:
+                                        print('Please input the right name')
+                                except(ValueError):
+                                    print('Enter a valid number')
+
                     elif course.upper() == 'C':
                         break
                     else:
@@ -217,9 +225,11 @@ def main():
                             scorer = str(input(''))
                             if course == '1' and scorer in nineHoleCourse:
                                 delete(course, scorer)
+                                print(f"{scorer} deleted from nineHoleCourse.")
                                 break
                             elif course == '2' and scorer in eighteenHoleCourse:
                                 delete(course, scorer)
+                                print(f"{scorer} deleted from eighteenHoleCourse.")
                                 break
                             else:
                                 print('Please input the right name')
@@ -231,6 +241,7 @@ def main():
                 
             case _:
                 print("Selection must be what's shown!")
+
 
 if __name__ == '__main__':
     main()
