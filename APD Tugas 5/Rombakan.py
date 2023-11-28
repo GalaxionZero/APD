@@ -11,12 +11,15 @@ eighteenHoleCourse = {'Amuro' : 78,
                        }
 
 
+#Function to create a new data in a dataset
 def create(course, name, score):
     if course == '1':
         nineHoleCourse.update({name : score})
     elif course == '2':
         eighteenHoleCourse.update({name : score})
 
+
+#Function to read the data after it has been bubble sorted
 def read(course):
     if course == '1':
         sortedItems = bubble_sort(nineHoleCourse)
@@ -28,6 +31,7 @@ def read(course):
             print(f'{i} : {j}')
 
 
+#Function to update a data in a dataset
 def update(course, scorer, score):
     if course == '1':
         nineHoleCourse[scorer] = score
@@ -35,6 +39,7 @@ def update(course, scorer, score):
         eighteenHoleCourse[scorer] = score
 
 
+#Function to delete a data from a dataset
 def delete(course, scorer):
     if course == '1':
         del nineHoleCourse[scorer]
@@ -42,6 +47,7 @@ def delete(course, scorer):
         del eighteenHoleCourse[scorer]
 
 
+#Function to bubble sort a dataset
 def bubble_sort(course):
     items = list(course.items())
     n = len(items)
@@ -53,28 +59,30 @@ def bubble_sort(course):
     return items
 
 
-def search(course, name):
+#Function to search using a keyword in a dataset
+def search(course, keyword):
     foundScorers = []
 
     if course == '1':
         courseName = '9 Hole Course'
         for scorer, score in nineHoleCourse.items():
-            if name.lower() in scorer.lower():
+            if keyword.lower() in scorer.lower():
                 foundScorers.append((scorer, score))
     elif course == '2':
         courseName = '18 Hole Course'
         for scorer, score in eighteenHoleCourse.items():
-            if name.lower() in scorer.lower():
+            if keyword.lower() in scorer.lower():
                 foundScorers.append((scorer, score))
 
     if foundScorers:
-        print(f"Scorer is found in {courseName} with the keyword '{name}':")
+        print(f"Scorer is found in {courseName} with the keyword '{keyword}':")
         for scorer, score in foundScorers:
             print(f"{scorer} : {score}")
     else:
-        print(f"No scorers found with the keyword '{name}'.")
+        print(f"No scorers found with the keyword '{keyword}'.")
 
 
+#Function to filter a dataset to only show certain data
 def filtered(course, threshold):
     belowThresholdScorers = []
 
@@ -97,6 +105,7 @@ def filtered(course, threshold):
         print(f"No scorers found in {courseName} with scores higher than {threshold}.")
 
 
+#Main function
 def main():
     while True:
         print('')
@@ -110,6 +119,9 @@ def main():
         selection_menu = str(input(''))
         os.system('cls')
         match selection_menu:
+
+
+            #This is for creating a new data in a dataset
             case '1':
                 while True:
                     print('1. The 9 Hole Course')
@@ -134,6 +146,7 @@ def main():
                     break
 
 
+            #This is to read and display a dataset either bubble sorted, searched, or filtered
             case '2':
                 while True:
                     print('')
@@ -155,8 +168,8 @@ def main():
                                     break
                                 case '2':
                                     print('Enter the name you would like to search for:')
-                                    name = str(input(''))
-                                    search(course, name)
+                                    keyword = str(input(''))
+                                    search(course, keyword)
                                     break
                                 case '3':
                                     while True:
@@ -172,6 +185,8 @@ def main():
                         print("Selection must be what's shown!")
                     break
 
+
+            #This is for updating a data in a dataset
             case '3':
                 while True:
                     print('')
@@ -209,6 +224,7 @@ def main():
                     break
 
                 
+            #This is for deleting a data from a dataset
             case '4':
                 while True:
                     print('')
